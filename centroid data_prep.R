@@ -63,6 +63,6 @@ val<- fromJSON(toJSON(tmp$results)) %>%
 
 #GET('https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCbwDDMbwSaoj_xBNueqzpnioP3M158_jo')
 
-#https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Aarhus+Denmark&key=AIzaSyCbwDDMbwSaoj_xBNueqzpnioP3M158_jo
+#https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Aarhus+Denmark&key=
 
 
