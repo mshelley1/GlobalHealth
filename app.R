@@ -7,16 +7,9 @@ library(shiny)
 library(leaflet)
 library(htmltools)
 
-# Create leaflet map (pasted from ghi_leaflet.R)
-
-out_dat<-read.csv('C:/Users/Mary Shelley/Documents/ghi_data/out_dat.csv') %>%
-         select(c('ghi_ID','Department','proj_title','loc_name','lat','long'))
+out_dat_pub<-read.csv('out_dat_pub.csv') 
 
 # Shiny/leaflet
-
-r_colors <- rgb(t(col2rgb(colors()) / 255))
-names(r_colors) <- colors()
-
 
 ui <- fluidPage(
     titlePanel("Global Health Projects"),
@@ -24,9 +17,9 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-    output$mymap <- renderLeaflet({leaflet(out_dat) %>%
+    output$mymap <- renderLeaflet({leaflet(out_dat_pub) %>%
             addProviderTiles(providers$CartoDB.Voyager)%>% # Stret map with English labels     
-            fitBounds(0,-35,0,75) %>%
+           # fitBounds(0,-35,0,75) %>%
             addMarkers(
                 lng=~long,lat=~lat,
                 popup=~as.character(htmlEscape(proj_title)),

@@ -50,3 +50,11 @@ for (i in 1:nrow(sub_dat)) {
 # Recombine with orginal data by gh_ID
 out_dat <- merge(ghi,sub_loc,by='ghi_ID')
 
+#--# Write data #---#
+# full data
+#write.csv(out_dat,'C:/Users/Mary Shelley/Documents/ghi_data/out_dat.csv')
+
+# Smaller data set for publishing
+# select(out_dat,c('ghi_ID','Department','proj_title','loc_name','lat','long')) %>%
+#  write.csv('C:/Users/Mary Shelley/Documents/vc_projs/GlobalHealth/out_dat_pub.csv')
+
