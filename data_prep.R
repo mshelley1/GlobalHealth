@@ -9,7 +9,7 @@ library(tidyr)
 library(xml2)
 
 # Read project data
-ghi<-read.csv('C:/Users/Mary Shelley/Documents/ghi/ghi_data_mks.csv')
+ghi<- read.csv('C:/Users/Mary Shelley/Documents/ghi_data/ghi_data_mks.csv')
 
 # Create unique ID
 ghi<-mutate(ghi,ghi_ID=seq.int(nrow(ghi)))
