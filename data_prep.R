@@ -1,5 +1,5 @@
 # File ingests, geocodes, and outputs data on location of SPH GHI projects
-# Note: an API key must be provided for Google's geocoding service (around line 22)
+# Note: an API key must be provided for Google's geocoding service 
 
 library(dplyr)
 library(stringr)
@@ -21,23 +21,23 @@ sub_dat<-select(ghi,c('ghi_ID','city','country'))
 urlp1='https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:'
 urlp2=',&key='  # Need to put in API key
 
-# Create df to hold cummulative results
+# Create dataframe to hold cummulative results
 sub_loc<-data.frame(ghi_ID=numeric(),loc_name=character(),lat=numeric(),long=numeric())
 
 # Loop through rows to geocode
 for (i in 1:nrow(sub_dat)) {
-  comp_city=str_trim(as.character(sub_dat[i,2]))
-  comp_country=str_trim(as.character(sub_dat[i,3]))
-  url=str_c(urlp1,comp_city,'|country:',comp_country,urlp2) #create url to call
+  comp_city=str_trim(as.character(sub_dat[i,2]))       #Remove leading and trailing spaces from city name
+  comp_country=str_trim(as.character(sub_dat[i,3]))    #Remove leading and trailing spaces from country name
+  url=str_c(urlp1,comp_city,'|country:',comp_country,urlp2) #Create url to call by concatenating
   
   tmp<-content(GET(url)) #call url and get content
   tmp2<-fromJSON(toJSON(tmp$results)) #parse results
 
- tmp_ID=sub_dat[i,1]
+ #tmp_ID=sub_dat[i,1]  #row checking
  #print(tmp_ID)
  
   # Create a row containing current results to bind to cummulative df
-   if (length(tmp2) > 0) {  #doesn't apply if no match; prevent error
+   if (length(tmp2) > 0) {                      #doesn't apply if no match; prevent error with check
       x<-data.frame(ghi_ID=tmp_ID,
                 loc_name=as.character(tmp2$formatted_address),
                 lat=as.numeric(tmp2$geometry$location$lat[[1]]),
