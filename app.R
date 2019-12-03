@@ -7,7 +7,7 @@ library(shiny)
 library(leaflet)
 library(htmltools)
 
-out_dat_pub<-read.csv('out_dat_pub.csv') 
+out_dat_pub<-read.csv('out_dat_pub.csv')   # be sure working directory is set to Rproj location usint getwd() and /or setwd()
 
 # Shiny/leaflet
 
@@ -19,7 +19,6 @@ ui <- fluidPage(
 server <- function(input, output, session) {
     output$mymap <- renderLeaflet({leaflet(out_dat_pub) %>%
             addProviderTiles(providers$CartoDB.Voyager)%>% # Stret map with English labels     
-           # fitBounds(0,-35,0,75) %>%
             addMarkers(
                 lng=~long,lat=~lat,
                 popup=~as.character(htmlEscape(proj_title)),
